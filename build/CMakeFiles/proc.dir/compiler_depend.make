@@ -243,7 +243,6 @@ CMakeFiles/proc.dir/lib/proc.cpp.o: /home/evheny/vsprojects/statistics/chlorophy
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
-  /usr/include/c++/13/vector \
   /usr/include/c++/13/x86_64-redhat-linux/bits/atomic_word.h \
   /usr/include/c++/13/x86_64-redhat-linux/bits/c++allocator.h \
   /usr/include/c++/13/x86_64-redhat-linux/bits/c++config.h \
@@ -350,8 +349,6 @@ CMakeFiles/proc.dir/lib/proc.cpp.o: /home/evheny/vsprojects/statistics/chlorophy
 /usr/include/c++/13/x86_64-redhat-linux/bits/c++allocator.h:
 
 /usr/include/c++/13/x86_64-redhat-linux/bits/atomic_word.h:
-
-/usr/include/c++/13/vector:
 
 /usr/include/c++/13/typeinfo:
 
