@@ -1,2 +1,0 @@
-/usr/bin/ar qc app/lib/static/liboutput.a CMakeFiles/output.dir/lib/output.cpp.o
-/usr/bin/ranlib app/lib/static/liboutput.a
