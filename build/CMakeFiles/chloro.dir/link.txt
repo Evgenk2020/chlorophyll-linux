@@ -1,0 +1,2 @@
+/usr/bin/ar qc app/lib/static/libchloro.a CMakeFiles/chloro.dir/lib/chloro.cpp.o
+/usr/bin/ranlib app/lib/static/libchloro.a
