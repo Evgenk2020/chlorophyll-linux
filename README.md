@@ -31,27 +31,27 @@ and then use simple SH schemes e.g.
 #!/bin/bash
 
 
-echo "вариант 1"
+echo "варіант 1"
 chloro -d 1 25 3 1 1.256 0.8
 echo ""
 
-echo "вариант 2"
+echo "варіант 2"
 chloro -d 1.5 25 3 1 1.1 0.7
 echo ""
 
-echo "вариант 3"
+echo "варіант 3"
 chloro -d 1.3 25 3 1 0.9 0.6
 echo ""
 
-echo "вариант 4"
+echo "варіант 4"
 chloro -d 2 25 3 1 0.965 0.65
 echo ""
 
-echo "вариант 5"
+echo "варіант 5"
 chloro -d 1.5 25 3 1 1.025 0.6
 echo ""
 
-echo "вариант 6"
+echo "варіант 6"
 chloro -d 1.5 25 3 1 0.984 0.625
 
 exec $SHELL
