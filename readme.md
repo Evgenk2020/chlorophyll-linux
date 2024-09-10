@@ -31,28 +31,13 @@ and then use simple SH schemes e.g.
 #!/bin/bash
 
 
-echo "варіант 1"
+echo "measurement 1"
 chloro -d 1 25 3 1 1.256 0.8
 echo ""
 
-echo "варіант 2"
+echo "measurement 2"
 chloro -d 1.5 25 3 1 1.1 0.7
 echo ""
-
-echo "варіант 3"
-chloro -d 1.3 25 3 1 0.9 0.6
-echo ""
-
-echo "варіант 4"
-chloro -d 2 25 3 1 0.965 0.65
-echo ""
-
-echo "варіант 5"
-chloro -d 1.5 25 3 1 1.025 0.6
-echo ""
-
-echo "варіант 6"
-chloro -d 1.5 25 3 1 0.984 0.625
 
 exec $SHELL
 
@@ -72,21 +57,5 @@ chloro -df 1.5 25 3 1 1.025 0.6
 chloro -df 1.5 25 3 1 0.984 0.625
 
 exec $SHELL
-
-```
-
-This program runs with `uk_UA.utf8` locale. It can be changed in `output.cpp`
-
-```C++
-
-std::locale m_loc("uk_UA.utf8");
-
-```
-
-To see locale list use
-
-```SH
-
-locale -a
 
 ```

@@ -17,10 +17,10 @@ set(WLIB_OUTPUT include/output.h lib/output.cpp)
 set(WLIB_PROC include/proc.h lib/proc.cpp)
 set(SRC src/main.cpp)
 
-project(chlor LANGUAGES CXX)
+project(chloro LANGUAGES CXX)
 
 #add_library(chl ${WLIB})
-add_library(chloro STATIC ${WLIB_CHLORO})
+add_library(chlor STATIC ${WLIB_CHLORO})
 add_library(output STATIC ${WLIB_OUTPUT})
 add_library(proc STATIC ${WLIB_PROC})
 
@@ -28,6 +28,6 @@ add_executable(${CMAKE_PROJECT_NAME} ${SRC})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} proc)
 target_link_libraries(${CMAKE_PROJECT_NAME} output)
-target_link_libraries(${CMAKE_PROJECT_NAME} chloro)
+target_link_libraries(${CMAKE_PROJECT_NAME} chlor)
 
 #target_link_libraries(${CMAKE_PROJECT_NAME} chl)

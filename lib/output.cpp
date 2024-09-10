@@ -9,23 +9,28 @@ void help_info::see_info()
 {
        std::cout << "*** Визначенні концентрації хлорофілів ***" << std::endl
                  << std::endl
-                 << "Для виводу в термінал" << std::endl
-                 << "chloro -d [наважка_г] [фільтарт_мл] [фотометрична_проба_мл] [фотометричний_розчинник_мл] [фотометр_665] [фотометр_649]" << std::endl
-                 << "Для виводу в файл" << std::endl
-                 << "chloro -df [наважка_г] [фільтарт_мл] [фотометрична_проба_мл] [фотометричний_розчинник_мл] [фотометр_665] [фотометр_649]" << std::endl
-                 << "Для виводу довідки" << std::endl
-                 << "chloro [-h|--help]" << std::endl
-                 << "Додаткова інформація" << std::endl
-                 << "chloro -i" << std::endl;
+                 << "Для виводу в термінал:" << std::endl
+                 << "-d [наважка(г)] [фільтарт(мл)] [фотометрична проба(мл)] [фотометричний розчинник(мл)] [показник фотометра 665] [показник фотометра 649]" << std::endl
+                 << std::endl
+                 << "Для виводу в файл:" << std::endl
+                 << "-df [наважка(г)] [фільтарт(мл)] [фотометрична проба(мл)] [фотометричний розчинник(мл)] [показник фотометра 665] [показник фотометра 649]" << std::endl
+                 << std::endl
+                 << "Для виводу довідки:" << std::endl
+                 << "-h | --help" << std::endl
+                 << std::endl
+                 << "Додаткова інформація:" << std::endl
+                 << "-i" << std::endl;
 }
 
 void inf_info::see_info()
 {
-       std::cout << "Концентрації хлорофілів a і b в розчинах визначають відповідно величинам екстинкції, виміряних за двох довжин хвиль" << std::endl
+       std::cout << "Для розрахунку концентрації хлорофілів A і B в розчині визначають його оптичну густину за довжини хвилі," << std::endl
+                 << "що відповідає максимумам спектра поглинання досліджуваних пігментів. Для хлорофілу A в 96% етанолі максимум" << std::endl
+                 << "поглинання λ = 665 нм, для хлорофілу B λ = 649 нм." << std::endl
                  << std::endl
-                 << "Формули для розчинів хлорофілу в 96% етанолі" << std::endl
-                 << "концентрація хлорофіла а (мг/мл) = 13.7 * D665 - 5.76 * D649" << std::endl
-                 << "концентрація хлорофіла b (мг/мл) = 25.8 * D649 - 7.6 * D665" << std::endl;
+                 << "Формули для розчинів хлорофілу в 96% етанолі:" << std::endl
+                 << "концентрація хлорофіла A (мг/мл) = 13.7 * D665 - 5.76 * D649" << std::endl
+                 << "концентрація хлорофіла B (мг/мл) = 25.8 * D649 - 7.6 * D665" << std::endl;
 }
 
 //--------------------------------------------------
@@ -72,27 +77,27 @@ void file_info::see_info(ch_data *dat)
 
        chlor_allowance allow;
 
-       writer << "Маса зразка:" << coma << quo << dat->mass_of_probe << quo << coma << quo << "г" << quo << std::endl
-              << "Об'єм фільтрату:" << coma << quo << dat->vol_filtrate << quo << coma << quo << "мл" << quo << std::endl
-              << "Об'єм фотометричної проби:" << coma << quo << dat->vol_photo_probe << quo << coma << quo << "мл" << quo << std::endl
-              << "Об'єм розчинника для розведення:" << coma << quo << dat->vol_photo_alch << quo << coma << quo << "мл" << quo << std::endl
-              << "Фотометричний показник D665:" << coma << quo << dat->d665 << quo << std::endl
-              << "Фотометричний показник D649:" << coma << quo << dat->d649 << quo << std::endl
+       writer << quo << "Маса зразка:" << quo << coma << quo << dat->mass_of_probe << quo << coma << quo << "г" << quo << std::endl
+              << quo << "Об'єм фільтрату:" << quo << coma << quo << dat->vol_filtrate << quo << coma << quo << "мл" << quo << std::endl
+              << quo << "Об'єм фотометричної проби:" << quo << coma << quo << dat->vol_photo_probe << quo << coma << quo << "мл" << quo << std::endl
+              << quo << "Об'єм розчинника для розведення:" << quo << coma << quo << dat->vol_photo_alch << quo << coma << quo << "мл" << quo << std::endl
+              << quo << "Фотометричний показник D665:" << quo << coma << quo << dat->d665 << quo << std::endl
+              << quo << "Фотометричний показник D649:" << quo << coma << quo << dat->d649 << quo << std::endl
               << std::endl;
 
-       writer << "Концентрація хлорофілу А:" << coma
+       writer << quo << "Концентрація хлорофілу А:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_a_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/мл" << quo << std::endl;
 
-       writer << "Концентрація хлорофілу B:" << coma
+       writer << quo << "Концентрація хлорофілу B:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/мл" << quo << std::endl;
 
-       writer << "Вміст хлорофілу А:" << coma
+       writer << quo << "Вміст хлорофілу А:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г" << quo << std::endl;
 
-       writer << "Вміст хлорофілу B:" << coma
+       writer << quo << "Вміст хлорофілу B:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_b_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г" << quo << std::endl;
 
-       writer << "Сума хлорофілів А + B:" << coma
+       writer << quo << "Сума хлорофілів А + B:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << quo << coma << quo << "мг/100 г" << quo << std::endl;
        writer << "" << std::endl;
 
