@@ -6,8 +6,7 @@ Run it with specified keys
 
 ```
   
-chloro -d [mass (g)] [filtrate (ml)] [photoprobe (ml)] [solvent (ml)] [D 665] [D 649]
-chloro -df [mass (g)] [filtrate (ml)] [photoprobe (ml)] [solvent (ml)] [D 665] [D 649]
+chloro -d | -df [data...]
 
 ```
 
