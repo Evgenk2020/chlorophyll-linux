@@ -1,4 +1,4 @@
-# Chlorophylls
+# Chlorophyll A and B maintenance
 
 Lab utility for determining the maintenance of chlorophylls A and B in plant material
   
@@ -6,7 +6,8 @@ Run it with specified keys
 
 ```
   
-chloro -d [mass_g] [filtrate_ml] [photoprobe_ml] [solvent_ml] [D_665] [D_649]
+chloro -d [mass (g)] [filtrate (ml)] [photoprobe (ml)] [solvent (ml)] [D 665] [D 649]
+chloro -df [mass (g)] [filtrate (ml)] [photoprobe (ml)] [solvent (ml)] [D 665] [D 649]
 
 ```
 
@@ -43,7 +44,7 @@ exec $SHELL
 
 ```
 
-or for writing `chlor-dada.csv` use
+or for writing `.csv` use
 
 ```SH
 
