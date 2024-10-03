@@ -29,8 +29,8 @@ void inf_info::see_info()
                  << "поглинання λ = 665 нм, для хлорофілу B λ = 649 нм." << std::endl
                  << std::endl
                  << "Формули для розчинів хлорофілу в 96% етанолі:" << std::endl
-                 << "концентрація хлорофіла A (мг/мл) = 13.7 * D665 - 5.76 * D649" << std::endl
-                 << "концентрація хлорофіла B (мг/мл) = 25.8 * D649 - 7.6 * D665" << std::endl;
+                 << "концентрація хлорофіла A (мг/л) = 13.7 * D665 - 5.76 * D649" << std::endl
+                 << "концентрація хлорофіла B (мг/л) = 25.8 * D649 - 7.6 * D665" << std::endl;
 }
 
 //--------------------------------------------------
@@ -50,10 +50,10 @@ void screen_info::see_info(ch_data *dat)
                  << std::endl;
 
        std::cout << "Концентрація хлорофілу А: "
-                 << allow.chloro_data_get(allow.chloro_a_allowance)->get_chloro(*dat) << " мг/мл" << std::endl;
+                 << allow.chloro_data_get(allow.chloro_a_allowance)->get_chloro(*dat) << " мг/л" << std::endl;
 
        std::cout << "Концентрація хлорофілу B: "
-                 << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << " мг/мл" << std::endl;
+                 << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << " мг/л" << std::endl;
 
        std::cout << "Вміст хлорофілу А: "
                  << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << " мг/100 г" << std::endl;
@@ -86,10 +86,10 @@ void file_info::see_info(ch_data *dat)
               << std::endl;
 
        writer << quo << "Концентрація хлорофілу А:" << quo << coma
-              << quo << allow.chloro_data_get(allow.chloro_a_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/мл" << quo << std::endl;
+              << quo << allow.chloro_data_get(allow.chloro_a_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/л" << quo << std::endl;
 
        writer << quo << "Концентрація хлорофілу B:" << quo << coma
-              << quo << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/мл" << quo << std::endl;
+              << quo << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/л" << quo << std::endl;
 
        writer << quo << "Вміст хлорофілу А:" << quo << coma
               << quo << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г" << quo << std::endl;
