@@ -101,7 +101,7 @@ void file_info::see_info(ch_data *dat)
               << quo << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << quo << coma << quo << "мг/100 г" << quo << std::endl;
        writer << "" << std::endl;
 
-       std::cout << "Дані додані у файл chlor-dada.csv" << std::endl;
+       std::cout << "Дані додані у файл chlor-data.csv" << std::endl;
 }
 
 //--------------------------------------------------
