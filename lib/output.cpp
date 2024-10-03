@@ -67,7 +67,7 @@ void screen_info::see_info(ch_data *dat)
 
 void file_info::see_info(ch_data *dat)
 {
-       std::ofstream writer("chlor-dada.csv", std::ios::app);
+       std::ofstream writer("chlor-data.csv", std::ios::app);
 
        const char coma = ',';
        const char quo = '\"';
