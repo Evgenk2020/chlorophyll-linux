@@ -56,13 +56,13 @@ void screen_info::see_info(ch_data *dat)
                  << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << " мг/л фотометричного зразка" << std::endl;
 
        std::cout << "Вміст хлорофілу А: "
-                 << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << " мг/г листка" << std::endl;
+                 << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
 
        std::cout << "Вміст хлорофілу B: "
-                 << allow.chloro_data_get(allow.chloro_b_mg)->get_chloro(*dat) << " мг/г листка" << std::endl;
+                 << allow.chloro_data_get(allow.chloro_b_mg)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
 
        std::cout << "Сума хлорофілів А + B: "
-                 << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << " мг/г листка" << std::endl;
+                 << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
 }
 
 void file_info::see_info(ch_data *dat)
@@ -92,13 +92,13 @@ void file_info::see_info(ch_data *dat)
               << quo << allow.chloro_data_get(allow.chloro_b_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/л фотометричного зразка" << quo << std::endl;
 
        writer << quo << "Вміст хлорофілу А:" << quo << coma
-              << quo << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << quo << coma << quo << "мг/г листка" << quo << std::endl;
+              << quo << allow.chloro_data_get(allow.chloro_a_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
 
        writer << quo << "Вміст хлорофілу B:" << quo << coma
-              << quo << allow.chloro_data_get(allow.chloro_b_mg)->get_chloro(*dat) << quo << coma << quo << "мг/г листка" << quo << std::endl;
+              << quo << allow.chloro_data_get(allow.chloro_b_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
 
        writer << quo << "Сума хлорофілів А + B:" << quo << coma
-              << quo << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << quo << coma << quo << "мг/г листка" << quo << std::endl;
+              << quo << allow.chloro_data_get(allow.chloro_sum)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
        writer << "" << std::endl;
 
        std::cout << "Дані додані у файл chlor-data.csv" << std::endl;

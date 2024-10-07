@@ -84,6 +84,6 @@ std::unique_ptr<chloro_data> chlor_allowance::chloro_data_get(chlor_data_type ty
 
 float cl_a_allowance::get_chloro(ch_data dat) const { return (float)(13.7 * dat.d665 - 5.76 * dat.d649); }
 float cl_b_allowance::get_chloro(ch_data dat) const { return (float)(25.8 * dat.d649 - 7.6 * dat.d665); }
-float final_a::get_chloro(ch_data dat) const { return (float)(dat.vol_photo_probe + dat.vol_photo_alch) * _all.get_chloro(dat) / dat.mass_of_probe; }
-float final_b::get_chloro(ch_data dat) const { return (float)((dat.vol_photo_probe + dat.vol_photo_alch) * _all.get_chloro(dat) / dat.mass_of_probe); }
+float final_a::get_chloro(ch_data dat) const { return (float)(dat.vol_filtrate * 0.01 * (dat.vol_photo_probe + dat.vol_photo_alch) * _all.get_chloro(dat) / dat.mass_of_probe); }
+float final_b::get_chloro(ch_data dat) const { return (float)(dat.vol_filtrate * 0.01 * (dat.vol_photo_probe + dat.vol_photo_alch) * _all.get_chloro(dat) / dat.mass_of_probe); }
 float cl_sum::get_chloro(ch_data dat) const { return (float)(fin_a.get_chloro(dat) + fin_b.get_chloro(dat)); }
