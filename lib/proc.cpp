@@ -61,6 +61,20 @@ void decree::converting()
             std::cout << "error.. use correct data values" << std::endl;
             exit(1);
         }
+
+        try
+        {
+            if (datas.vol_photo_probe == 0 || datas.mass_of_probe == 0)
+            {
+                throw std::runtime_error("division by zero...");
+            }
+        }
+
+        catch (const std::runtime_error &e)
+        {
+            std::cout << e.what() << std::endl;
+            exit(1);
+        }
     }
 
     else

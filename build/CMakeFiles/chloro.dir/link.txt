@@ -1,0 +1,1 @@
+/usr/lib64/ccache/c++ CMakeFiles/chloro.dir/src/main.cpp.o -o app/bin/chloro  app/lib/static/libproc.a app/lib/static/liboutput.a app/lib/static/libchlor.a

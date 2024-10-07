@@ -1,0 +1,6 @@
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/chlor.dir
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/output.dir
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/proc.dir
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/chloro.dir
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/edit_cache.dir
+/home/evheny/vsprojects/statistics/chlorophyll-linux/build/CMakeFiles/rebuild_cache.dir
