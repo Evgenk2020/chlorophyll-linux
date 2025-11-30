@@ -1,12 +1,12 @@
-# Chlorophyll A and B maintenance
+# Statistical analysis of variance
 
-Lab utility for determining the maintenance of chlorophylls A and B in plant material
-  
+This tool is designed for processing data sets that include more than two distinct variants, including cases with partial overlap. By default, it evaluates confidence intervals using the Student's t-test at a significance level of 0.05. This threshold can be adjusted to accommodate different precision requirements.
+
 Run it with specified keys
 
 ```
 
-chloro -d | -df [data...]
+stexp -d | -df [data...] [alf (0 <...< 1)]
 
 ```
 
@@ -14,40 +14,42 @@ Using `-df` key you may write data to `*.csv` file for the next importing to Lib
 
 ![Google table data import](/.img/screen.png)
 
-.sh file example to run in terminal
+.sh file example for running in terminal
 
 ```SH
 
 #!/bin/bash
 
-echo "measurement 1"
-chloro -d 1 25 3 1 1.256 0.8
-echo ""
-
-echo "measurement 2"
-chloro -d 1.5 25 3 1 1.1 0.7
-echo ""
+stexp -d 2.3 3.4 2.6 3.5
+echo "----------------"
+stexp -d 2.5 3.4 2.6 -- 8.9 11.2 13.5
+echo "----------------"
+stexp -d 2.3 3.4 2.6 3.5 alf 0.01
+echo "----------------"
+stexp -d 2.5 3.4 2.6 -- 8.9 11.2 13.5 alf 0.2
 
 exec $SHELL
 
 ```
 
-or for writing `.csv` use
+.sh file example for writing to `.csv`
 
 ```SH
 
 #!/bin/bash
 
-chloro -df 1 25 3 1 1.256 0.8
-chloro -df 1.5 25 3 1 1.1 0.7
-chloro -df 1.3 25 3 1 0.9 0.6
-chloro -df 2 25 3 1 0.965 0.65
-chloro -df 1.5 25 3 1 1.025 0.6
-chloro -df 1.5 25 3 1 0.984 0.625
+stexp -df 2.3 3.4 2.6 3.5
+echo "----------------"
+stexp -df 2.5 3.4 2.6 -- 8.9 11.2 13.5
+echo "----------------"
+stexp -df 2.3 3.4 2.6 3.5 alf 0.01
+echo "----------------"
+stexp -df 2.5 3.4 2.6 -- 8.9 11.2 13.5 alf 0.2
 
 exec $SHELL
 
 ```
+
 <hr>
 
 > You need
@@ -64,9 +66,9 @@ exec $SHELL
 
 ```SH
 
-git clone https://github.com/Evgenk2020/chlorophyll-linux
+git clone https://github.com/Evgenk2020/student-experiment
 
-cd chlorophyll-linux
+cd student-experiment
 
 ```
 
@@ -106,7 +108,7 @@ sudo dnf install *.rpm
 
 If using either than Fedora/CentOS Stream change the first string `set(assemble_tgz OFF)` in CMakeLists.txt to `set(assemble_tgz ON)` before building the Project. Move `.tar.gz` file to any folder and unpack it.
 
-Then run `chloro -d | -df [data...]` in terminal from unpacked folder.
+Then run `./stexp -d | -df [data...] [alf (0 < alf <1)]` in terminal from unpacked folder.
 
 For more convenience you may add path to the application into `.bashrc` file
 
@@ -114,6 +116,7 @@ For more convenience you may add path to the application into `.bashrc` file
 
 export PATH=$PATH:/%path_to_application_folder%/
 
+
 ```
 
-In this case it will be possible to run `chloro -d | -df [data...]` in terminal directly.
+In this case it will be possible to run `stexp -d | -df [data...] [alf (0 < alf <1)]` in terminal directly.

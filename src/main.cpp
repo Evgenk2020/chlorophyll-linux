@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        std::cout << "error.. data is empty" << std::endl;
+        std::cout << "error.. data is empty. use chloro -h | --help for help" << std::endl;
     }
 
     else

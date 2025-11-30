@@ -16,7 +16,8 @@ else
   cd $BUILD_TARGET
 fi
 
-cmake -B $BUILD_TARGET -S $CURR_DIR
-cmake --build .
+cmake ..
+make
+cpack
 
 exec $SHELL

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+CURR_DIR=$0
+CURR_DIR=$(realpath $CURR_DIR)
+CURR_DIR=$(dirname $CURR_DIR)
+
+export LD_LIBRARY_PATH=$CURR_DIR/lib
+exec $CURR_DIR/bin/chloro "$@"
+
+exec $SHELL
