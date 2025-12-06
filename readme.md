@@ -1,5 +1,29 @@
 # Chlorophyll A and B maintenance
 
+<p align="center">
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Evgenk2020/chlorophyll-linux" alt="license">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux/commits">
+    <img src="https://img.shields.io/github/last-commit/Evgenk2020/chlorophyll-linux" alt="last commit">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux">
+    <img src="https://img.shields.io/github/repo-size/Evgenk2020/chlorophyll-linux" alt="repo size">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux/stargazers">
+    <img src="https://img.shields.io/github/stars/Evgenk2020/chlorophyll-linux" alt="stars">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux/network/members">
+    <img src="https://img.shields.io/github/forks/Evgenk2020/chlorophyll-linux" alt="forks">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux">
+    <img src="https://img.shields.io/github/languages/top/Evgenk2020/chlorophyll-linux" alt="top language">
+  </a>
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux/releases">
+    <img src="https://img.shields.io/github/v/release/Evgenk2020/chlorophyll-linux" alt="latest release">
+  </a>
+</p>
+
 Lab utility for determining the maintenance of chlorophylls A and B in plant material
   
 Run it with specified keys
