@@ -22,7 +22,7 @@
   </a>
 </p>
 
-# Chlorophyll A and B maintenanc
+# Chlorophyll A and B maintenance
 
 Lab utility for determining the maintenance of chlorophylls A and B in plant material
   
