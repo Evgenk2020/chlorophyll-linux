@@ -1,5 +1,3 @@
-# Chlorophyll A and B maintenance
-
 <p align="center">
   <a href="https://github.com/Evgenk2020/chlorophyll-linux/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Evgenk2020/chlorophyll-linux" alt="license">
@@ -23,6 +21,8 @@
     <img src="https://img.shields.io/github/v/release/Evgenk2020/chlorophyll-linux" alt="latest release">
   </a>
 </p>
+
+# Chlorophyll A and B maintenanc
 
 Lab utility for determining the maintenance of chlorophylls A and B in plant material
   
