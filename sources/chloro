@@ -6,5 +6,3 @@ CURR_DIR=$(dirname $CURR_DIR)
 
 export LD_LIBRARY_PATH=$CURR_DIR/lib
 exec $CURR_DIR/bin/chloro "$@"
-
-exec $SHELL
