@@ -20,6 +20,10 @@
   <a href="https://github.com/Evgenk2020/chlorophyll-linux/releases">
     <img src="https://img.shields.io/github/v/release/Evgenk2020/chlorophyll-linux" alt="latest release">
   </a>
+  <!-- Added version badge -->
+  <a href="https://github.com/Evgenk2020/chlorophyll-linux">
+    <img src="https://img.shields.io/badge/version-1.0.1-blue" alt="version">
+  </a>
 </p>
 
 # Chlorophyll A and B maintenance
