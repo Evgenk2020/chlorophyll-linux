@@ -1,4 +1,4 @@
-set(assemble_tgz ON)
+set(assemble_tgz OFF)
 
 cmake_minimum_required(VERSION 3.31)
 
