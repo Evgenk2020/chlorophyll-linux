@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.31)
 project(chloro VERSION 1.0.1 LANGUAGES CXX)
 
+# -------------------------------------------------------------
+# to switch packaging to *.tar.gz >>> set(assemble_tgz ON)
 set(assemble_tgz OFF)
+# -------------------------------------------------------------
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -26,26 +29,24 @@ add_executable(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/src/main.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC chloro_wlib chloro_wlib_output chloro_wlib_proc)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-install(TARGETS chloro_wlib chloro_wlib_output chloro_wlib_proc LIBRARY DESTINATION lib)
-
-if(assemble_tgz)
-    install(FILES ${CMAKE_SOURCE_DIR}/sources/chloro DESTINATION "."
-                        PERMISSIONS
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
-                        GROUP_READ GROUP_EXECUTE 
-                        WORLD_READ WORLD_EXECUTE)
-endif()
+# -------------------------------------------------------------
+# packaging
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Chlorophyll A and B maintenance for Linux terminal")
 
-if(assemble_tgz)
+if (assemble_tgz)
+    install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+    install(TARGETS chloro_wlib chloro_wlib_output chloro_wlib_proc LIBRARY DESTINATION lib)
+    install(FILES ${CMAKE_SOURCE_DIR}/sources/chloro DESTINATION "." PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
     set(CPACK_GENERATOR "TGZ")
-else()
+else ()
+    include(GNUInstallDirs)
+    install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS chloro_wlib chloro_wlib_output chloro_wlib_proc LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
     set(CPACK_GENERATOR "RPM")
     set(CPACK_RPM_PACKAGE_RELOCATABLE "TRUE")
-endif()
+endif ()
 
 include(CPack)
