@@ -26,7 +26,7 @@ protected:
     virtual void counting() = 0;
 
 public:
-    virtual ~processing();
+    virtual ~processing() = default;
     void going();
 };
 
@@ -36,7 +36,7 @@ private:
     ch_data datas;
 
 public:
-    ~decree();
+    ~decree() = default;
     decree(inp_var _inp);
     void helping() override;
     void converting() override;

@@ -2,8 +2,6 @@
 #include "../include/probe_data.h"
 #include <regex>
 
-processing::~processing() {}
-
 void processing::going()
 {
     if (_inp_var.size() == 1)
@@ -18,8 +16,7 @@ void processing::going()
     }
 }
 
-decree::~decree() {}
-decree::decree(inp_var _inp) { _inp_var = _inp; }
+decree::decree(inp_var _inp) { _inp_var = std::move(_inp); }
 
 void decree::helping()
 {
