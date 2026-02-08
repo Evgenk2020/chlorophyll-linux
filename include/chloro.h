@@ -17,7 +17,7 @@ class chloro_data
 {
 public:
     virtual float get_chloro(ch_data dat) const = 0;
-    ~chloro_data();
+    ~chloro_data() = default;
 };
 
 class chlor_allowance
@@ -33,7 +33,7 @@ public:
     };
 
     static std::unique_ptr<chloro_data> chloro_data_get(chlor_data_type types);
-    ~chlor_allowance();
+    ~chlor_allowance() = default;
 };
 
 #endif // CHLORO_H

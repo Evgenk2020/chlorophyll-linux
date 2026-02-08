@@ -1,8 +1,4 @@
-#include <stdexcept>
 #include "../include/chloro.h"
-
-chloro_data::~chloro_data() {}
-chlor_allowance::~chlor_allowance() {}
 
 class cl_a_allowance : public chloro_data
 {
