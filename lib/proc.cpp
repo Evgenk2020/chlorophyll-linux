@@ -6,13 +6,14 @@ void processing::going()
 {
     if (_inp_var.size() == 1)
     {
-        this->helping();
+        helping();
+        return;
     }
 
     if (_inp_var.size() > 1)
     {
-        this->converting();
-        this->counting();
+        converting();
+        counting();
     }
 }
 

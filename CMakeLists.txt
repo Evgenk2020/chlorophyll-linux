@@ -3,7 +3,7 @@ project(chloro VERSION 1.0.2 LANGUAGES CXX)
 
 # -------------------------------------------------------------
 # to switch packaging to *.tar.gz >>> set(assemble_tgz ON)
-set(assemble_tgz OFF)
+set(assemble_tgz ON)
 # -------------------------------------------------------------
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
