@@ -21,16 +21,16 @@ decree::decree(inp_var _inp) { _inp_var = std::move(_inp); }
 
 void decree::helping()
 {
-    if (_inp_var.at(1) == _keys.k_help_one || _inp_var.at(1) == _keys.k_help_two)
+    const auto &key = _inp_var.at(1);
+
+    if (key == keys::k_help_one || key == keys::k_help_two)
     {
-        print_info inf(new help_info);
-        inf._print();
+        print_info{new help_info}._print();
     }
 
-    else if (_inp_var.at(1) == _keys.k_info)
+    else if (key == keys::k_info)
     {
-        print_info inf(new inf_info);
-        inf._print();
+        print_info{new inf_info}._print();
     }
 
     else

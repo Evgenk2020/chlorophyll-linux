@@ -9,11 +9,11 @@ typedef std::map<int, std::string> inp_var;
 
 struct keys
 {
-    const std::string k_help_one = "-h";
-    const std::string k_help_two = "--help";
-    const std::string k_info = "-i";
-    const std::string k_data = "-d";
-    const std::string k_file = "-df";
+    static constexpr std::string_view k_help_one{"-h"};
+    static constexpr std::string_view k_help_two{"--help"};
+    static constexpr std::string_view k_info{"-i"};
+    static constexpr std::string_view k_data{"-d"};
+    static constexpr std::string_view k_file{"-df"};
 };
 
 class processing
@@ -36,7 +36,7 @@ private:
     ch_data datas;
 
 public:
-    ~decree() = default;
+    ~decree() override = default;
     decree(inp_var _inp);
     void helping() override;
     void converting() override;
