@@ -41,6 +41,13 @@ void decree::helping()
 
 void decree::converting()
 {
+    if (_inp_var.size() < 7)
+    {
+        std::cout << "error.. the number of data can not be less than seven" << std::endl;
+        exit(1);
+    }
+
+    // ----------------------------------------------------------------------------------
 
     if (_inp_var.size() == 7)
     {
