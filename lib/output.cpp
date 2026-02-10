@@ -45,28 +45,59 @@ void screen_info::see_info(ch_data *dat)
 {
        chlor_allowance allow;
 
-       std::cout << "Маса зразка: " << dat->mass_of_probe << " г" << std::endl
-                 << "Об'єм фільтрату: " << dat->vol_filtrate << " мл" << std::endl
-                 << "Об'єм фотометричної проби: " << dat->vol_photo_probe << " мл" << std::endl
-                 << "Об'єм розчинника для розведення: " << dat->vol_photo_alch << " мл" << std::endl
-                 << "Фотометричний показник D665: " << dat->d665 << std::endl
-                 << "Фотометричний показник D649: " << dat->d649 << std::endl
-                 << std::endl;
+       enum class mesure
+       {
+              gram,
+              mililiter,
+              empty,
+              mg_photo_probe,
+              mg_leaf
+       };
 
-       std::cout << "Концентрація хлорофілу А: "
-                 << allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat) << " мг/л фотометричного зразка" << std::endl;
+       auto line = [&](mesure type, const std::string_view &label, const auto &value) -> void
+       {
+              constexpr std::string_view gram = "{} {} г\n";
+              constexpr std::string_view mililiter = "{} {} мл\n";
+              constexpr std::string_view empty = "{} {}\n";
+              constexpr std::string_view mg_photo_probe = "{} {} мг/л фотометричного зразка\n";
+              constexpr std::string_view mg_leaf = "{} {} мг/100 г листка\n";
 
-       std::cout << "Концентрація хлорофілу B: "
-                 << allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat) << " мг/л фотометричного зразка" << std::endl;
+              switch (type)
+              {
+              case mesure::gram:
+                     std::print(gram, label, value);
+                     break;
 
-       std::cout << "Вміст хлорофілу А: "
-                 << allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
+              case mesure::mililiter:
+                     std::print(mililiter, label, value);
+                     break;
 
-       std::cout << "Вміст хлорофілу B: "
-                 << allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
+              case mesure::empty:
+                     std::print(empty, label, value);
+                     break;
 
-       std::cout << "Сума хлорофілів А + B: "
-                 << allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat) << " мг/100 г листка" << std::endl;
+              case mesure::mg_photo_probe:
+                     std::print(mg_photo_probe, label, value);
+                     break;
+
+              case mesure::mg_leaf:
+                     std::print(mg_leaf, label, value);
+                     break;
+              }
+       };
+
+       line(mesure::gram, "Маса зразка:", dat->mass_of_probe);
+       line(mesure::mililiter, "Об'єм фільтрату:", dat->vol_filtrate);
+       line(mesure::mililiter, "Об'єм фотометричної проби:", dat->vol_photo_probe);
+       line(mesure::mililiter, "Об'єм розчинника для розведення:", dat->vol_photo_alch);
+       line(mesure::empty, "Фотометричний показник D665:", dat->d665);
+       line(mesure::empty, "Фотометричний показник D649:", dat->d649);
+       std::print("\n");
+       line(mesure::mg_photo_probe, "Концентрація хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
+       line(mesure::mg_photo_probe, "Концентрація хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
+       line(mesure::mg_leaf, "Вміст хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat));
+       line(mesure::mg_leaf, "Вміст хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat));
+       line(mesure::mg_leaf, "Сума хлорофілів А + B:", allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat));
 }
 
 void file_info::see_info(ch_data *dat)
