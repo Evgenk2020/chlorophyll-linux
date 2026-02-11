@@ -4,6 +4,7 @@
 #include <fstream>
 #include <locale>
 #include <print>
+#include <filesystem>
 
 general_info::~general_info() {}
 
@@ -102,41 +103,34 @@ void screen_info::see_info(ch_data *dat)
 
 void file_info::see_info(ch_data *dat)
 {
-       std::ofstream writer("chlor-data.csv", std::ios::app);
+       namespace file_system = std::filesystem;
+       namespace range_views = std::ranges::views;
 
-       const char coma = ',';
-       const char quo = '\"';
+       const file_system::path file{"chlor-data.csv"};
+       std::ofstream csv(file, std::ios::app);
 
-       std::locale m_loc("uk_UA.utf8");
-       writer.imbue(m_loc);
-
+       auto loc = std::locale{"uk_UA.utf8"};
        chlor_allowance allow;
 
-       writer << quo << "Маса зразка:" << quo << coma << quo << dat->mass_of_probe << quo << coma << quo << "г" << quo << std::endl
-              << quo << "Об'єм фільтрату:" << quo << coma << quo << dat->vol_filtrate << quo << coma << quo << "мл" << quo << std::endl
-              << quo << "Об'єм фотометричної проби:" << quo << coma << quo << dat->vol_photo_probe << quo << coma << quo << "мл" << quo << std::endl
-              << quo << "Об'єм розчинника для розведення:" << quo << coma << quo << dat->vol_photo_alch << quo << coma << quo << "мл" << quo << std::endl
-              << quo << "Фотометричний показник D665:" << quo << coma << quo << dat->d665 << quo << std::endl
-              << quo << "Фотометричний показник D649:" << quo << coma << quo << dat->d649 << quo << std::endl
-              << std::endl;
+       auto write = [&](std::string_view label, const auto &value) -> void
+       {
+              constexpr std::string_view formatter = "\"{}\",\"{:L}\"\n";
+              csv << std::format(loc, formatter, label, value);
+       };
 
-       writer << quo << "Концентрація хлорофілу А:" << quo << coma
-              << quo << allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/л фотометричного зразка" << quo << std::endl;
-
-       writer << quo << "Концентрація хлорофілу B:" << quo << coma
-              << quo << allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat) << quo << coma << quo << "мг/л фотометричного зразка" << quo << std::endl;
-
-       writer << quo << "Вміст хлорофілу А:" << quo << coma
-              << quo << allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
-
-       writer << quo << "Вміст хлорофілу B:" << quo << coma
-              << quo << allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
-
-       writer << quo << "Сума хлорофілів А + B:" << quo << coma
-              << quo << allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat) << quo << coma << quo << "мг/100 г листка" << quo << std::endl;
-       writer << "" << std::endl;
-
-       std::cout << "Дані додані у файл chlor-data.csv" << std::endl;
+       write("Маса зразка (г):", dat->mass_of_probe);
+       write("Об'єм фільтрату (мл):", dat->vol_filtrate);
+       write("Об'єм фотометричної проби (мл):", dat->vol_photo_probe);
+       write("Об'єм розчинника для розведення (мл):", dat->vol_photo_alch);
+       write("Фотометричний показник D665:", dat->d665);
+       write("Фотометричний показник D649:", dat->d649);
+       csv << '\n';
+       write("Концентрація хлорофілу А (мг/л фотометричного зразка):", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
+       write("Концентрація хлорофілу B (мг/л фотометричного зразка):", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
+       write("Вміст хлорофілу А (мг/100 г листка):", allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat));
+       write("Вміст хлорофілу B (мг/100 г листка):", allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat));
+       write("Сума хлорофілів А + B (мг/100 г листка):", allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat));
+       std::print("Дані додані у файл {}\n", file.string());
 }
 
 //--------------------------------------------------
