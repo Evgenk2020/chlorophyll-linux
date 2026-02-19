@@ -2,15 +2,29 @@
 #define CHLORO_H
 
 #include <memory>
+#include <array>
+
+enum class field
+{
+    mass_of_probe,
+    vol_filtrate,
+    vol_photo_probe,
+    vol_photo_alch,
+    d665,
+    d649,
+    count
+};
 
 struct ch_data
 {
-    float mass_of_probe;
-    float vol_filtrate;
-    float vol_photo_probe;
-    float vol_photo_alch;
-    float d665;
-    float d649;
+private:
+    std::array<float, static_cast<int>(field::count)> values{};
+
+public:
+    float &at(field f)
+    {
+        return values[static_cast<int>(f)];
+    }
 };
 
 enum class chlor_data_type

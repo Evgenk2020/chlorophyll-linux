@@ -53,12 +53,12 @@ void decree::converting()
     {
         try
         {
-            datas.mass_of_probe = std::stof(_inp_var.find(probe_data::_prob_mass)->second);
-            datas.vol_filtrate = std::stof(_inp_var.find(probe_data::_filtrate_vol)->second);
-            datas.vol_photo_probe = std::stof(_inp_var.find(probe_data::_photo_probe)->second);
-            datas.vol_photo_alch = std::stof(_inp_var.find(probe_data::_photo_alch)->second);
-            datas.d665 = std::stof(_inp_var.find(probe_data::_d665)->second);
-            datas.d649 = std::stof(_inp_var.find(probe_data::_d649)->second);
+            datas.at(field::mass_of_probe) = std::stof(_inp_var.find(probe_data::_prob_mass)->second);
+            datas.at(field::vol_filtrate) = std::stof(_inp_var.find(probe_data::_filtrate_vol)->second);
+            datas.at(field::vol_photo_probe) = std::stof(_inp_var.find(probe_data::_photo_probe)->second);
+            datas.at(field::vol_photo_alch) = std::stof(_inp_var.find(probe_data::_photo_alch)->second);
+            datas.at(field::d665) = std::stof(_inp_var.find(probe_data::_d665)->second);
+            datas.at(field::d649) = std::stof(_inp_var.find(probe_data::_d649)->second);
         }
 
         catch (const std::exception &e)
@@ -69,7 +69,7 @@ void decree::converting()
 
         try
         {
-            if (datas.vol_photo_probe == 0 || datas.mass_of_probe == 0)
+            if (datas.at(field::vol_photo_probe) == 0 || datas.at(field::mass_of_probe) == 0)
             {
                 throw std::runtime_error("division by zero...");
             }
