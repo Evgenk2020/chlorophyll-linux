@@ -17,10 +17,8 @@ enum class field
 
 struct ch_data
 {
-private:
     std::array<float, static_cast<int>(field::count)> values{};
-
-public:
+    
     float &at(field f)
     {
         return values[static_cast<int>(f)];
