@@ -87,12 +87,12 @@ void screen_info::see_info(ch_data *dat)
               }
        };
 
-       line(mesure::gram, "Маса зразка:", dat->mass_of_probe);
-       line(mesure::mililiter, "Об'єм фільтрату:", dat->vol_filtrate);
-       line(mesure::mililiter, "Об'єм фотометричної проби:", dat->vol_photo_probe);
-       line(mesure::mililiter, "Об'єм розчинника для розведення:", dat->vol_photo_alch);
-       line(mesure::empty, "Фотометричний показник D665:", dat->d665);
-       line(mesure::empty, "Фотометричний показник D649:", dat->d649);
+       line(mesure::gram, "Маса зразка:", dat->at(field::mass_of_probe));
+       line(mesure::mililiter, "Об'єм фільтрату:", dat->at(field::vol_filtrate));
+       line(mesure::mililiter, "Об'єм фотометричної проби:", dat->at(field::vol_photo_probe));
+       line(mesure::mililiter, "Об'єм розчинника для розведення:", dat->at(field::vol_photo_alch));
+       line(mesure::empty, "Фотометричний показник D665:", dat->at(field::d665));
+       line(mesure::empty, "Фотометричний показник D649:", dat->at(field::d649));
        std::print("\n");
        line(mesure::mg_photo_probe, "Концентрація хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
        line(mesure::mg_photo_probe, "Концентрація хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
@@ -118,12 +118,12 @@ void file_info::see_info(ch_data *dat)
               csv << std::format(loc, formatter, label, value);
        };
 
-       write("Маса зразка (г):", dat->mass_of_probe);
-       write("Об'єм фільтрату (мл):", dat->vol_filtrate);
-       write("Об'єм фотометричної проби (мл):", dat->vol_photo_probe);
-       write("Об'єм розчинника для розведення (мл):", dat->vol_photo_alch);
-       write("Фотометричний показник D665:", dat->d665);
-       write("Фотометричний показник D649:", dat->d649);
+       write("Маса зразка (г):", dat->at(field::mass_of_probe));
+       write("Об'єм фільтрату (мл):", dat->at(field::vol_filtrate));
+       write("Об'єм фотометричної проби (мл):", dat->at(field::vol_photo_probe));
+       write("Об'єм розчинника для розведення (мл):", dat->at(field::vol_photo_alch));
+       write("Фотометричний показник D665:", dat->at(field::d665));
+       write("Фотометричний показник D649:", dat->at(field::d649));
        csv << '\n';
        write("Концентрація хлорофілу А (мг/л фотометричного зразка):", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
        write("Концентрація хлорофілу B (мг/л фотометричного зразка):", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
