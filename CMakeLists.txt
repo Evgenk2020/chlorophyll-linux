@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.31)
-project(chloro VERSION 1.0.2 LANGUAGES CXX)
+project(chloro VERSION 1.0.3 LANGUAGES CXX)
 
 # -------------------------------------------------------------
 # to switch packaging to *.tar.gz >>> set(assemble_tgz ON)
-set(assemble_tgz ON)
+set(assemble_tgz OFF)
 # -------------------------------------------------------------
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

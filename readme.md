@@ -22,7 +22,7 @@
   </a>
   <!-- Added version badge -->
   <a href="https://github.com/Evgenk2020/chlorophyll-linux">
-    <img src="https://img.shields.io/badge/version-1.0.2-blue" alt="version">
+    <img src="https://img.shields.io/badge/version-1.0.3-blue" alt="version">
   </a>
 </p>
 
