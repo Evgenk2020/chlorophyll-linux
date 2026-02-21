@@ -43,7 +43,7 @@ void decree::converting()
     if (_inp_var.size() < 7)
     {
         std::cout << "error.. the number of data can not be less than seven" << std::endl;
-        exit(1);
+        std::exit(EXIT_FAILURE);
     }
 
     // ----------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ void decree::converting()
             if (it == _inp_var.end())
             {
                 std::cerr << "Missing input value\n";
-                exit(1);
+                std::exit(EXIT_FAILURE);
             }
 
             const std::string &str = it->second;
@@ -68,7 +68,7 @@ void decree::converting()
             if (ec != std::errc())
             {
                 std::cerr << "Invalid numeric value\n";
-                exit(1);
+                std::exit(EXIT_FAILURE);
             }
 
             a = val;
