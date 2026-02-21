@@ -1,6 +1,5 @@
 #include "../include/proc.h"
-#include "../include/probe_data.h"
-#include <regex>
+#include <charconv>
 
 void processing::going()
 {
@@ -51,34 +50,35 @@ void decree::converting()
 
     if (_inp_var.size() == 7)
     {
-        try
+        int counter{2};
+        for (auto &a : datas.values)
         {
-            datas.at(field::mass_of_probe) = std::stof(_inp_var.find(probe_data::_prob_mass)->second);
-            datas.at(field::vol_filtrate) = std::stof(_inp_var.find(probe_data::_filtrate_vol)->second);
-            datas.at(field::vol_photo_probe) = std::stof(_inp_var.find(probe_data::_photo_probe)->second);
-            datas.at(field::vol_photo_alch) = std::stof(_inp_var.find(probe_data::_photo_alch)->second);
-            datas.at(field::d665) = std::stof(_inp_var.find(probe_data::_d665)->second);
-            datas.at(field::d649) = std::stof(_inp_var.find(probe_data::_d649)->second);
-        }
+            auto it = _inp_var.find(counter);
 
-        catch (const std::exception &e)
-        {
-            std::cout << "error.. use correct data values" << std::endl;
-            exit(1);
-        }
-
-        try
-        {
-            if (datas.at(field::vol_photo_probe) == 0 || datas.at(field::mass_of_probe) == 0)
+            if (it == _inp_var.end())
             {
-                throw std::runtime_error("division by zero...");
+                std::cerr << "Missing input value\n";
+                exit(1);
             }
+
+            const std::string &str = it->second;
+            float val{};
+            auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), val);
+
+            if (ec != std::errc())
+            {
+                std::cerr << "Invalid numeric value\n";
+                exit(1);
+            }
+
+            a = val;
+            counter++;
         }
 
-        catch (const std::runtime_error &e)
+        if (datas.at(field::vol_photo_probe) == 0 || datas.at(field::mass_of_probe) == 0)
         {
-            std::cout << e.what() << std::endl;
-            exit(1);
+            std::cerr << "division by zero...\n";
+            std::exit(EXIT_FAILURE);
         }
     }
 
