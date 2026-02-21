@@ -1,38 +1,35 @@
 #include "../include/proc.h"
-#include "../include/probe_data.h"
-#include <regex>
-
-processing::~processing() {}
+#include <charconv>
 
 void processing::going()
 {
     if (_inp_var.size() == 1)
     {
-        this->helping();
+        helping();
+        return;
     }
 
     if (_inp_var.size() > 1)
     {
-        this->converting();
-        this->counting();
+        converting();
+        counting();
     }
 }
 
-decree::~decree() {}
-decree::decree(inp_var _inp) { _inp_var = _inp; }
+decree::decree(inp_var _inp) { _inp_var = std::move(_inp); }
 
 void decree::helping()
 {
-    if (_inp_var.at(1) == _keys.k_help_one || _inp_var.at(1) == _keys.k_help_two)
+    const auto &key = _inp_var.at(1);
+
+    if (key == keys::k_help_one || key == keys::k_help_two)
     {
-        print_info inf(new help_info);
-        inf._print();
+        print_info{new help_info}._print();
     }
 
-    else if (_inp_var.at(1) == _keys.k_info)
+    else if (key == keys::k_info)
     {
-        print_info inf(new inf_info);
-        inf._print();
+        print_info{new inf_info}._print();
     }
 
     else
@@ -43,37 +40,45 @@ void decree::helping()
 
 void decree::converting()
 {
+    if (_inp_var.size() < 7)
+    {
+        std::cout << "error.. the number of data can not be less than seven" << std::endl;
+        exit(1);
+    }
+
+    // ----------------------------------------------------------------------------------
 
     if (_inp_var.size() == 7)
     {
-        try
+        int counter{2};
+        for (auto &a : datas.values)
         {
-            datas.mass_of_probe = std::stof(_inp_var.find(probe_data::_prob_mass)->second);
-            datas.vol_filtrate = std::stof(_inp_var.find(probe_data::_filtrate_vol)->second);
-            datas.vol_photo_probe = std::stof(_inp_var.find(probe_data::_photo_probe)->second);
-            datas.vol_photo_alch = std::stof(_inp_var.find(probe_data::_photo_alch)->second);
-            datas.d665 = std::stof(_inp_var.find(probe_data::_d665)->second);
-            datas.d649 = std::stof(_inp_var.find(probe_data::_d649)->second);
-        }
+            auto it = _inp_var.find(counter);
 
-        catch (const std::exception &e)
-        {
-            std::cout << "error.. use correct data values" << std::endl;
-            exit(1);
-        }
-
-        try
-        {
-            if (datas.vol_photo_probe == 0 || datas.mass_of_probe == 0)
+            if (it == _inp_var.end())
             {
-                throw std::runtime_error("division by zero...");
+                std::cerr << "Missing input value\n";
+                exit(1);
             }
+
+            const std::string &str = it->second;
+            float val{};
+            auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), val);
+
+            if (ec != std::errc())
+            {
+                std::cerr << "Invalid numeric value\n";
+                exit(1);
+            }
+
+            a = val;
+            counter++;
         }
 
-        catch (const std::runtime_error &e)
+        if (datas.at(field::vol_photo_probe) == 0 || datas.at(field::mass_of_probe) == 0)
         {
-            std::cout << e.what() << std::endl;
-            exit(1);
+            std::cerr << "division by zero...\n";
+            std::exit(EXIT_FAILURE);
         }
     }
 
