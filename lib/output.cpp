@@ -6,8 +6,6 @@
 #include <print>
 #include <filesystem>
 
-general_info::~general_info() {}
-
 void help_info::see_info()
 {
        std::println(
@@ -39,8 +37,6 @@ void inf_info::see_info()
 }
 
 //--------------------------------------------------
-
-data_info::~data_info() {}
 
 void screen_info::see_info(ch_data *dat)
 {

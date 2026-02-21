@@ -7,7 +7,7 @@ class general_info
 {
 public:
     virtual void see_info() = 0;
-    virtual ~general_info();
+    virtual ~general_info() = default;
 };
 
 class help_info : public general_info
@@ -28,7 +28,7 @@ class data_info
 {
 public:
     virtual void see_info(ch_data *dat) = 0;
-    virtual ~data_info();
+    virtual ~data_info() = default;
 };
 
 class screen_info : public data_info
