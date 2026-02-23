@@ -74,6 +74,7 @@ std::unique_ptr<chloro_data> chlor_allowance::chloro_data_get(chlor_data_type ty
     default:
     {
         throw "error.. data are absent";
+        std::exit(EXIT_FAILURE);
     }
     }
 }
