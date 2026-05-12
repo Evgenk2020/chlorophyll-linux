@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curr=$(dirname $(realpath $0))
+
+export LD_LIBRARY_PATH=$curr/lib
+$curr/bin/chloro "$@"
