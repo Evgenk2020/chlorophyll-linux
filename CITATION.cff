@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Kopilov"
+  given-names: "Evheny"
+  orcid: "https://orcid.org/0000-0001-5463-8761" # for ORCID
+title: "chlorophyll-linux: Chlorophyll A and B determination for laboratory analysis"
+version: 1.0.4
+date-released: 2026-05-25
+url: "https://github.com/Evgenk2020/chlorophyll-linux"
+keywords:
+  - bioinformatics
+  - agrotech
+  - plant-physiology
+  - mycology
+  - chlorophyll-analysis
+  - computational-biology
+license: GPL-3.0
