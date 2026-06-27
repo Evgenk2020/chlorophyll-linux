@@ -17,7 +17,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Находим пакет RapidJSON в системе
 find_package(RapidJSON REQUIRED)
 
 add_library(chloro_wlib SHARED ${CMAKE_SOURCE_DIR}/lib/chloro.cpp)
@@ -26,8 +25,6 @@ target_include_directories(chloro_wlib PRIVATE ${CMAKE_SOURCE_DIR}/include)
 add_library(chloro_wlib_output SHARED ${CMAKE_SOURCE_DIR}/lib/output.cpp)
 target_include_directories(chloro_wlib_output PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
-# Заменяем target_link_libraries на прямое указание заголовочных файлов,
-# так как RapidJSON header-only и не имеет экспортируемого таргета в Fedora.
 target_include_directories(chloro_wlib_output PRIVATE ${RAPIDJSON_INCLUDE_DIRS})
 
 add_library(chloro_wlib_proc SHARED ${CMAKE_SOURCE_DIR}/lib/proc.cpp)
