@@ -24,7 +24,6 @@ target_include_directories(chloro_wlib PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 add_library(chloro_wlib_output SHARED ${CMAKE_SOURCE_DIR}/lib/output.cpp)
 target_include_directories(chloro_wlib_output PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
 target_include_directories(chloro_wlib_output PRIVATE ${RAPIDJSON_INCLUDE_DIRS})
 
 add_library(chloro_wlib_proc SHARED ${CMAKE_SOURCE_DIR}/lib/proc.cpp)
@@ -52,7 +51,6 @@ else ()
     include(GNUInstallDirs)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(TARGETS chloro_wlib chloro_wlib_output chloro_wlib_proc LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    set(CPACK_GENERATOR "RPM")
     set(CPACK_GENERATOR "RPM")
     set(CPACK_RPM_PACKAGE_RELOCATABLE "TRUE")
 endif ()

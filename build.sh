@@ -12,4 +12,3 @@ cmake ..
 cmake --build . --parallel
 cpack
 
-exec "$SHELL"
