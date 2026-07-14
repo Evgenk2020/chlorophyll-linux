@@ -41,6 +41,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE chloro_wlib chloro_wlib_output chl
 include(FetchContent)
 FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(INSTALL_GTEST OFF)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
