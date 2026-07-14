@@ -59,7 +59,7 @@ void screen_info::see_info(ch_data *dat)
 {
        chlor_allowance allow;
 
-       enum class mesure
+       enum class measure
        {
               gram,
               mililiter,
@@ -68,7 +68,7 @@ void screen_info::see_info(ch_data *dat)
               mg_leaf
        };
 
-       auto line = [&](mesure type, const std::string_view &label, const auto &value) -> void
+       auto line = [&](measure type, const std::string_view &label, const auto &value) -> void
        {
               constexpr std::string_view gram = "{} {} г\n";
               constexpr std::string_view mililiter = "{} {} мл\n";
@@ -78,40 +78,40 @@ void screen_info::see_info(ch_data *dat)
 
               switch (type)
               {
-              case mesure::gram:
+              case measure::gram:
                      std::print(gram, label, value);
                      break;
 
-              case mesure::mililiter:
+              case measure::mililiter:
                      std::print(mililiter, label, value);
                      break;
 
-              case mesure::empty:
+              case measure::empty:
                      std::print(empty, label, value);
                      break;
 
-              case mesure::mg_photo_probe:
+              case measure::mg_photo_probe:
                      std::print(mg_photo_probe, label, value);
                      break;
 
-              case mesure::mg_leaf:
+              case measure::mg_leaf:
                      std::print(mg_leaf, label, value);
                      break;
               }
        };
 
-       line(mesure::gram, "Маса зразка:", dat->at(field::mass_of_probe));
-       line(mesure::mililiter, "Об'єм фільтрату:", dat->at(field::vol_filtrate));
-       line(mesure::mililiter, "Об'єм фотометричної проби:", dat->at(field::vol_photo_probe));
-       line(mesure::mililiter, "Об'єм розчинника для розведення:", dat->at(field::vol_photo_alch));
-       line(mesure::empty, "Фотометричний показник D665:", dat->at(field::d665));
-       line(mesure::empty, "Фотометричний показник D649:", dat->at(field::d649));
+       line(measure::gram, "Маса зразка:", dat->at(field::mass_of_probe));
+       line(measure::mililiter, "Об'єм фільтрату:", dat->at(field::vol_filtrate));
+       line(measure::mililiter, "Об'єм фотометричної проби:", dat->at(field::vol_photo_probe));
+       line(measure::mililiter, "Об'єм розчинника для розведення:", dat->at(field::vol_photo_alch));
+       line(measure::empty, "Фотометричний показник D665:", dat->at(field::d665));
+       line(measure::empty, "Фотометричний показник D649:", dat->at(field::d649));
        std::print("\n");
-       line(mesure::mg_photo_probe, "Концентрація хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
-       line(mesure::mg_photo_probe, "Концентрація хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
-       line(mesure::mg_leaf, "Вміст хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat));
-       line(mesure::mg_leaf, "Вміст хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat));
-       line(mesure::mg_leaf, "Сума хлорофілів А + B:", allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat));
+       line(measure::mg_photo_probe, "Концентрація хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_allowance)->get_chloro(*dat));
+       line(measure::mg_photo_probe, "Концентрація хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_allowance)->get_chloro(*dat));
+       line(measure::mg_leaf, "Вміст хлорофілу А:", allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(*dat));
+       line(measure::mg_leaf, "Вміст хлорофілу B:", allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(*dat));
+       line(measure::mg_leaf, "Сума хлорофілів А + B:", allow.chloro_data_get(chlor_data_type::chloro_sum)->get_chloro(*dat));
 }
 
 void file_info::see_info(ch_data *dat)
@@ -119,9 +119,10 @@ void file_info::see_info(ch_data *dat)
        namespace file_system = std::filesystem;
 
        const file_system::path file{"chlor-data.csv"};
+       bool need_bom = !file_system::exists(file) || file_system::file_size(file) == 0;
        std::ofstream csv(file, std::ios::app | std::ios::binary);
 
-       if (!file_system::exists(file) || file_system::file_size(file) == 0)
+       if (need_bom)
        {
               const unsigned char bom[] = {0xEF, 0xBB, 0xBF};
               csv.write(reinterpret_cast<const char *>(bom), 3);

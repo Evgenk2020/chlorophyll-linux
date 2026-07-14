@@ -36,6 +36,26 @@ target_link_libraries(${PROJECT_NAME} PRIVATE chloro_wlib chloro_wlib_output chl
 # file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/sources/" DESTINATION "${CMAKE_BINARY_DIR}")
 
 # -------------------------------------------------------------
+# Google Test
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(chloro_tests ${CMAKE_SOURCE_DIR}/tests/test_chloro.cpp)
+target_include_directories(chloro_tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(chloro_tests PRIVATE chloro_wlib GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(chloro_tests)
+
+# -------------------------------------------------------------
 # packaging
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})

@@ -136,7 +136,7 @@ chloro -h
 
 <hr>
 
-## If using either than Fedora/CentOS Stream
+## If using other than Fedora/CentOS Stream
 
 1. Clone the Repository
 
@@ -206,5 +206,5 @@ GitHub automatically parses the `CITATION.cff` file, so you can easily copy the 
   year         = 2026,
   publisher    = {GitHub},
   version      = {1.0.4},
-  url          = {[Chlorophyll A and B maintenance](https://github.com/Evgenk2020/chlorophyll-linux)}
+  url          = {https://github.com/Evgenk2020/chlorophyll-linux}
 }
