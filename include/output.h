@@ -1,7 +1,7 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
-#include "../include/chloro.h"
+#include "chloro.h"
 
 class general_info
 {

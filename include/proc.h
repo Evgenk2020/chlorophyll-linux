@@ -1,7 +1,7 @@
 #ifndef PROC_H
 #define PROC_H
 
-#include "../include/output.h"
+#include "output.h"
 #include <vector>
 #include <string_view>
 #include <expected>
