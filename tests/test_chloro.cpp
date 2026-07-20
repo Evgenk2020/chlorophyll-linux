@@ -101,8 +101,8 @@ TEST(ChlorophyllTest, DivisionByZeroMassOfProbe)
     data.at(field::d665) = 1.25f;
     data.at(field::d649) = 0.45f;
 
-    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(data), const char *);
-    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(data), const char *);
+    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(data), std::runtime_error);
+    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(data), std::runtime_error);
 }
 
 // Test division by zero protection for vol_photo_probe
@@ -117,8 +117,8 @@ TEST(ChlorophyllTest, DivisionByZeroVolPhotoProbe)
     data.at(field::d665) = 1.25f;
     data.at(field::d649) = 0.45f;
 
-    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(data), const char *);
-    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(data), const char *);
+    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_a_mg)->get_chloro(data), std::runtime_error);
+    EXPECT_THROW(allow.chloro_data_get(chlor_data_type::chloro_b_mg)->get_chloro(data), std::runtime_error);
 }
 
 // Test ch_data field access

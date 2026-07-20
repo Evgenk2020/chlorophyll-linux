@@ -84,8 +84,7 @@ float final_a::get_chloro(ch_data dat) const
 {
     if (dat.at(field::vol_photo_probe) == 0.0f || dat.at(field::mass_of_probe) == 0.0f)
     {
-        throw "division by zero";
-        std::exit(EXIT_FAILURE);
+       throw std::runtime_error("division by zero");
     }
 
     return static_cast<float>(dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
@@ -95,8 +94,7 @@ float final_b::get_chloro(ch_data dat) const
 {
     if (dat.at(field::vol_photo_probe) == 0.0f || dat.at(field::mass_of_probe) == 0.0f)
     {
-        throw "division by zero";
-        std::exit(EXIT_FAILURE);
+        throw std::runtime_error("division by zero");
     }
 
     return static_cast<float>(dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
