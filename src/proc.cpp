@@ -242,11 +242,13 @@ void decree::counting(const ch_data &datas)
         print_info inf(new json_info);
         inf._print(datas);
     }
+
     else if (_save_to_file)
     {
         print_info inf(new file_info);
         inf._print(datas);
     }
+    
     else
     {
         print_info inf(new screen_info);

@@ -10,8 +10,8 @@ class processing
 {
 protected:
     std::vector<std::string_view> _args;
-    bool _save_to_file = false;
-    bool _json_output = false;
+    bool _save_to_file {false};
+    bool _json_output {false};
 
     virtual void helping() = 0;
     virtual std::expected<ch_data, std::string> parsing() = 0;
