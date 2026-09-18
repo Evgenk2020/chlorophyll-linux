@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-1.0.4-blue)](https://github.com/Evgenk2020/chlorophyll-linux)
+[![Version](https://img.shields.io/badge/version-1.0.5-blue)](https://github.com/Evgenk2020/chlorophyll-linux)
 [![Latest Release](https://img.shields.io/github/v/release/Evgenk2020/chlorophyll-linux)](https://github.com/Evgenk2020/chlorophyll-linux/releases)
 [![License](https://img.shields.io/github/license/Evgenk2020/chlorophyll-linux)](https://github.com/Evgenk2020/chlorophyll-linux/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Evgenk2020/chlorophyll-linux)](https://github.com/Evgenk2020/chlorophyll-linux/commits)
@@ -205,6 +205,6 @@ GitHub automatically parses the `CITATION.cff` file, so you can easily copy the 
   month        = may,
   year         = 2026,
   publisher    = {GitHub},
-  version      = {1.0.4},
+  version      = {1.0.5},
   url          = {https://github.com/Evgenk2020/chlorophyll-linux}
 }
