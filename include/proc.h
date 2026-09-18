@@ -25,6 +25,7 @@ public:
 class decree : public processing
 {
 private:
+    static std::expected<float, std::string> parse_float(std::string_view str);
     std::expected<ch_data, std::string> parse_flags();
     ch_data run_interactive_wizard();
 

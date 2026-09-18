@@ -45,7 +45,7 @@ void decree::helping()
     }
 }
 
-static std::expected<float, std::string> parse_float(std::string_view str)
+std::expected<float, std::string> decree::parse_float(std::string_view str)
 {
     float val{};
     auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), val);
