@@ -43,10 +43,7 @@ void processing::going()
     if (!result)
     {
         std::println(stderr, "Помилка: {}", result.error());
-        std::println(
-            stderr,
-            "Спробуйте знову або використовуйте -h для довідки.");
-
+        std::println(stderr, "Спробуйте знову або використовуйте -h для довідки.");
         std::exit(EXIT_FAILURE);
     }
 
@@ -79,29 +76,22 @@ std::expected<float, std::string> decree::parse_float(std::string_view str)
 {
     float value{};
 
-    const auto [ptr, ec] =
-        std::from_chars(str.data(), str.data() + str.size(), value);
+    const auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value);
 
-    // from_chars может успешно разобрать только начало строки.
-    // Поэтому проверяем, что обработана вся строка.
+    // Check that the entire string has been processed.
     if (ec != std::errc() || ptr != str.data() + str.size())
     {
-        return std::unexpected(
-            "Некоректне числове значення '" +
-            std::string(str) +
-            "'");
+        return std::unexpected("Некоректне числове значення '" + std::string(str) + "'");
     }
 
     if (!std::isfinite(value))
     {
-        return std::unexpected(
-            "Числове значення має бути скінченним");
+        return std::unexpected("Числове значення має бути скінченним");
     }
 
     if (value < 0.0f)
     {
-        return std::unexpected(
-            "Значення не може бути від'ємним");
+        return std::unexpected("Значення не може бути від'ємним");
     }
 
     return value;
@@ -114,7 +104,6 @@ std::expected<float, std::string> decree::parse_float(std::string_view str)
 ch_data decree::run_interactive_wizard()
 {
     std::println("\n=== Інтерактивний режим введення даних ===");
-
     ch_data data;
 
     const auto prompt_field = [](field target) -> float
@@ -122,7 +111,6 @@ ch_data decree::run_interactive_wizard()
         while (true)
         {
             std::print("{}: ", ch_data::label_of(target));
-
             std::string input;
 
             if (std::cin >> input)
@@ -138,52 +126,31 @@ ch_data decree::run_interactive_wizard()
                 continue;
             }
 
-            // EOF — дальнейшее интерактивное чтение невозможно.
+            // EOF — further interactive reading is not possible
             if (std::cin.eof())
             {
-                std::println(
-                    stderr,
-                    " -> Помилка: завершено введення.");
-
+                std::println(stderr, " -> Помилка: завершено введення.");
                 std::exit(EXIT_FAILURE);
             }
 
-            // Обычная ошибка ввода.
+            // Common typing error
             std::cin.clear();
-            std::cin.ignore(
-                std::numeric_limits<std::streamsize>::max(),
-                '\n');
-
-            std::println(
-                stderr,
-                " -> Помилка: некоректне введення.");
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::println(stderr, " -> Помилка: некоректне введення.");
         }
     };
 
-    data.at(field::mass_of_probe) =
-        prompt_field(field::mass_of_probe);
-
-    data.at(field::vol_filtrate) =
-        prompt_field(field::vol_filtrate);
-
-    data.at(field::vol_photo_probe) =
-        prompt_field(field::vol_photo_probe);
-
-    data.at(field::vol_photo_alch) =
-        prompt_field(field::vol_photo_alch);
-
-    data.at(field::d665) =
-        prompt_field(field::d665);
-
-    data.at(field::d649) =
-        prompt_field(field::d649);
-
+    data.at(field::mass_of_probe) = prompt_field(field::mass_of_probe);
+    data.at(field::vol_filtrate) = prompt_field(field::vol_filtrate);
+    data.at(field::vol_photo_probe) = prompt_field(field::vol_photo_probe);
+    data.at(field::vol_photo_alch) = prompt_field(field::vol_photo_alch);
+    data.at(field::d665) = prompt_field(field::d665);
+    data.at(field::d649) = prompt_field(field::d649);
     std::print("\nЗберегти результати у CSV файл? (y/n): ");
 
     char choice{};
 
-    if (std::cin >> choice &&
-        (choice == 'y' || choice == 'Y'))
+    if (std::cin >> choice && (choice == 'y' || choice == 'Y'))
     {
         _save_to_file = true;
     }
@@ -198,7 +165,6 @@ ch_data decree::run_interactive_wizard()
 std::expected<ch_data, std::string> decree::parse_flags()
 {
     ch_data data;
-
     std::array<bool, static_cast<int>(field::count)> set_flags{};
 
     enum class flag_type
@@ -215,10 +181,10 @@ std::expected<ch_data, std::string> decree::parse_flags()
         field target;
     };
 
-    // Единое описание всех поддерживаемых CLI-флагов.
+    // Unified description of all supported CLI flags
     //
-    // Для file/json поле target не используется.
-    // Для value оно определяет поле ch_data.
+    // For file/json, the target field is not used
+    // For value, it specifies the ch_data field
     constexpr std::array flags{
         flag_info{"-df", flag_type::file, field::count},
         flag_info{"--file", flag_type::file, field::count},
@@ -244,17 +210,8 @@ std::expected<ch_data, std::string> decree::parse_flags()
     for (std::size_t i = 0; i < _args.size(); ++i)
     {
         const auto arg = _args[i];
+        const auto flag = std::find_if(flags.begin(), flags.end(), [arg](const flag_info &info) { return info.name == arg; });
 
-        const auto flag = std::find_if(
-            flags.begin(),
-            flags.end(),
-            [arg](const flag_info &info)
-            {
-                return info.name == arg;
-            });
-
-        // Совместимость с существующим поведением:
-        // неизвестные параметры игнорируются.
         if (flag == flags.end())
         {
             continue;
@@ -274,29 +231,24 @@ std::expected<ch_data, std::string> decree::parse_flags()
             break;
         }
 
-        // Флаг типа value обязан иметь следующий аргумент.
+        // A flag of type 'value' must have a subsequent argument
         if (i + 1 >= _args.size())
         {
-            return std::unexpected(
-                "Відсутнє значення для прапорця " +
-                std::string(arg));
+            return std::unexpected("Відсутнє значення для прапорця " + std::string(arg));
         }
 
         const auto value = parse_float(_args[++i]);
 
         if (!value)
         {
-            return std::unexpected(
-                std::string(arg) +
-                ": " +
-                value.error());
+            return std::unexpected(std::string(arg) + ": " + value.error());
         }
 
         data.at(flag->target) = *value;
         set_flags[static_cast<int>(flag->target)] = true;
     }
 
-    // Все шесть полей являются обязательными.
+    // All six fields are mandatory
     for (int i = 0; i < static_cast<int>(field::count); ++i)
     {
         if (set_flags[i])
@@ -305,10 +257,7 @@ std::expected<ch_data, std::string> decree::parse_flags()
         }
 
         const auto missing_field = static_cast<field>(i);
-
-        return std::unexpected(
-            "Не вказано обов'язковий параметр: " +
-            std::string(ch_data::label_of(missing_field)));
+        return std::unexpected("Не вказано обов'язковий параметр: " + std::string(ch_data::label_of(missing_field)));
     }
 
     return data;
@@ -320,11 +269,9 @@ std::expected<ch_data, std::string> decree::parse_flags()
 
 std::expected<ch_data, std::string> decree::parsing()
 {
-    // Нет аргументов или передан только --file:
-    // запускаем интерактивный режим.
-    if (_args.empty() ||
-        (_args.size() == 1 &&
-         (_args[0] == "-df" || _args[0] == "--file")))
+    // No arguments or only --file passed:
+    // start interactive mode
+    if (_args.empty() || (_args.size() == 1 && (_args[0] == "-df" || _args[0] == "--file")))
     {
         if (!_args.empty())
         {
@@ -334,10 +281,9 @@ std::expected<ch_data, std::string> decree::parsing()
         return run_interactive_wizard();
     }
 
-    // Специальный случай для Node.js:
-    // --json без параметров не должен запускать wizard.
-    if (_args.size() == 1 &&
-        (_args[0] == "-j" || _args[0] == "--json"))
+    // Special case for Node.js:
+    // --json without arguments should not launch the wizard
+    if (_args.size() == 1 && (_args[0] == "-j" || _args[0] == "--json"))
     {
         return std::unexpected(
             "Для JSON режиму необхідно вказати всі параметри "
@@ -353,8 +299,7 @@ std::expected<ch_data, std::string> decree::parsing()
 
     const auto &data = *result;
 
-    if (data.at(field::vol_photo_probe) == 0.0f ||
-        data.at(field::mass_of_probe) == 0.0f)
+    if (data.at(field::vol_photo_probe) == 0.0f || data.at(field::mass_of_probe) == 0.0f)
     {
         return std::unexpected(
             "Ділення на нуль! Маса зразка та об'єм проби "
