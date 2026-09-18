@@ -285,9 +285,7 @@ std::expected<ch_data, std::string> decree::parsing()
     // --json without arguments should not launch the wizard
     if (_args.size() == 1 && (_args[0] == "-j" || _args[0] == "--json"))
     {
-        return std::unexpected(
-            "Для JSON режиму необхідно вказати всі параметри "
-            "розрахунку (-w, -f, -p, -s, --d665, --d649).");
+        return std::unexpected("Для JSON режиму необхідно вказати всі параметри розрахунку (-w, -f, -p, -s, --d665, --d649).");
     }
 
     auto result = parse_flags();
@@ -301,9 +299,7 @@ std::expected<ch_data, std::string> decree::parsing()
 
     if (data.at(field::vol_photo_probe) == 0.0f || data.at(field::mass_of_probe) == 0.0f)
     {
-        return std::unexpected(
-            "Ділення на нуль! Маса зразка та об'єм проби "
-            "мають бути більшими за 0.");
+        return std::unexpected("Ділення на нуль! Маса зразка та об'єм проби мають бути більшими за 0.");
     }
 
     return result;
