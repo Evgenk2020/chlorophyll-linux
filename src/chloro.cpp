@@ -87,7 +87,7 @@ float final_a::get_chloro(ch_data dat) const
        throw std::runtime_error("division by zero");
     }
 
-    return static_cast<float>(dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
+    return (dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
 }
 
 float final_b::get_chloro(ch_data dat) const
@@ -97,7 +97,7 @@ float final_b::get_chloro(ch_data dat) const
         throw std::runtime_error("division by zero");
     }
 
-    return static_cast<float>(dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
+    return (dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
 }
 
 float cl_sum::get_chloro(ch_data dat) const { return static_cast<float>(fin_a.get_chloro(dat) + fin_b.get_chloro(dat)); }
