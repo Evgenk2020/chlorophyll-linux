@@ -2,16 +2,16 @@
 #define PROC_H
 
 #include "output.h"
-#include <vector>
-#include <string_view>
 #include <expected>
+#include <string_view>
+#include <vector>
 
 class processing
 {
 protected:
     std::vector<std::string_view> _args;
-    bool _save_to_file {false};
-    bool _json_output {false};
+    bool _save_to_file{false};
+    bool _json_output{false};
 
     virtual void helping() = 0;
     virtual std::expected<ch_data, std::string> parsing() = 0;
