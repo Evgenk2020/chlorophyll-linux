@@ -19,44 +19,9 @@ enum class field
 struct ch_data
 {
     std::array<float, static_cast<int>(field::count)> values{};
-
-    float &at(field f)
-    {
-        return values[static_cast<int>(f)];
-    }
-
-    const float &at(field f) const
-    {
-        return values[static_cast<int>(f)];
-    }
-
-    // Helper method for getting Ukrainian field names in interactive mode
-    static std::string_view label_of(field f)
-    {
-        switch (f)
-        {
-        case field::mass_of_probe:
-            return "Наважка (г)";
-
-        case field::vol_filtrate:
-            return "Об'єм фільтрату (мл)";
-
-        case field::vol_photo_probe:
-            return "Фотометрична проба (мл)";
-
-        case field::vol_photo_alch:
-            return "Фотометричний розчинник (мл)";
-
-        case field::d665:
-            return "Показник фотометра D665";
-
-        case field::d649:
-            return "Показник фотометра D649";
-
-        default:
-            return "Невідоме поле";
-        }
-    }
+    float &at(field f);
+    const float &at(field f) const;
+    static std::string_view label_of(field f); // helper method for getting Ukrainian field names in interactive mode
 };
 
 enum class chlor_data_type

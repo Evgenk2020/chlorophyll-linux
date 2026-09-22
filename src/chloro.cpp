@@ -1,5 +1,50 @@
 #include "../include/chloro.h"
 
+// -----------------------------------------------------------------------------
+// struct ch_data
+// -----------------------------------------------------------------------------
+
+float &ch_data::at(field f)
+{
+    return values[static_cast<int>(f)];
+}
+
+const float &ch_data::at(field f) const
+{
+    return values[static_cast<int>(f)];
+}
+
+std::string_view ch_data::label_of(field f)
+{
+    switch (f)
+    {
+    case field::mass_of_probe:
+        return "Наважка (г)";
+
+    case field::vol_filtrate:
+        return "Об'єм фільтрату (мл)";
+
+    case field::vol_photo_probe:
+        return "Фотометрична проба (мл)";
+
+    case field::vol_photo_alch:
+        return "Фотометричний розчинник (мл)";
+
+    case field::d665:
+        return "Показник фотометра D665";
+
+    case field::d649:
+        return "Показник фотометра D649";
+
+    default:
+        return "Невідоме поле";
+    }
+}
+
+// -----------------------------------------------------------------------------
+// class chloro_data
+// -----------------------------------------------------------------------------
+
 class cl_a_allowance : public chloro_data
 {
 public:
@@ -40,7 +85,9 @@ public:
     float get_chloro(ch_data dat) const override;
 };
 
-//-------------------------------------------------------
+// -----------------------------------------------------------------------------
+// class chlor_allowance
+// -----------------------------------------------------------------------------
 
 std::unique_ptr<chloro_data> chlor_allowance::chloro_data_get(chlor_data_type types)
 {
@@ -73,10 +120,12 @@ std::unique_ptr<chloro_data> chlor_allowance::chloro_data_get(chlor_data_type ty
 
     default:
     {
-        throw "error.. data are absent";
+        throw std::runtime_error("error.. data are absent");
     }
     }
 }
+
+// -----------------------------------------------------------------------------
 
 float cl_a_allowance::get_chloro(ch_data dat) const { return static_cast<float>(13.7 * dat.at(field::d665) - 5.76 * dat.at(field::d649)); }
 float cl_b_allowance::get_chloro(ch_data dat) const { return static_cast<float>(25.8 * dat.at(field::d649) - 7.6 * dat.at(field::d665)); }
@@ -84,7 +133,7 @@ float final_a::get_chloro(ch_data dat) const
 {
     if (dat.at(field::vol_photo_probe) == 0.0f || dat.at(field::mass_of_probe) == 0.0f)
     {
-       throw std::runtime_error("division by zero");
+        throw std::runtime_error("division by zero");
     }
 
     return (dat.at(field::vol_filtrate) * 0.1 * ((dat.at(field::vol_photo_probe) + dat.at(field::vol_photo_alch)) / dat.at(field::vol_photo_probe)) * _all.get_chloro(dat) / dat.at(field::mass_of_probe));
